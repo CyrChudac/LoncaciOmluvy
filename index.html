@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Omluva – přesměrování</title>
+  <script>
+    window.onload = function() {
+      var today = new Date();
+      var dayOfWeek = today.getDay(); // 0 = neděle, 1 = pondělí, ..., 6 = sobota
+
+      // Pokud není pondělí (1), spočítá příští pondělí
+      if(dayOfWeek !== 1) {
+        var daysToNextMonday = (8 - dayOfWeek) % 7; 
+        today.setDate(today.getDate() + daysToNextMonday);
+      }
+
+      // Formát RRRR-MM-DD
+      var yyyy = today.getFullYear();
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var dd = String(today.getDate()).padStart(2, '0');
+      var dateStr = yyyy + "-" + mm + "-" + dd;
+
+      // Základní URL vašeho formuláře (vložte svůj FORM_ID a entry.XXXXXX)
+      var formBase = "https://docs.google.com/forms/d/e/1FAIpQLSclEWdS4HH5nWNzsOtvNCMO0rl9MZ8U0HCtuDZqFbBppH4MjQ/viewform?usp=pp_url&entry.1893980471=";
+
+      // Přesměrování na formulář s vypočteným datem
+      window.location.href = formBase + dateStr;
+    }
+  </script>
+</head>
+<body>
+  Přesměrovávám na omlouvací formulář...
+</body>
+</html>
