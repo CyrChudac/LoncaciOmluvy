@@ -7,12 +7,14 @@
     window.onload = function() {
       var today = new Date();
       var dayOfWeek = today.getDay(); // 0 = neděle, 1 = pondělí, ..., 6 = sobota
+      var hour = today.getHours(); // aktuální hodina (0–23)
 
-      // Pokud není pondělí (1), spočítá příští pondělí
-      if(dayOfWeek !== 1) {
-        var daysToNextMonday = (8 - dayOfWeek) % 7; 
-        today.setDate(today.getDate() + daysToNextMonday);
+      // spočteme dny do příští schůzky
+      var daysToNextMonday = (8 - dayOfWeek) % 7; 
+      if(dayOfWeek == 1 && hour > 17) {
+        daysToNextMonday = 7
       }
+      today.setDate(today.getDate() + daysToNextMonday);
 
       // Formát RRRR-MM-DD
       var yyyy = today.getFullYear();
